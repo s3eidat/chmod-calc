@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' data: blob:; connect-src 'self' data: blob:; worker-src 'self' blob:; manifest-src 'self'; form-action 'none'; base-uri 'none'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Chmod Calc — Free Unix Permission Calculator (755, rwxr-xr-x) | S3eidat Tools</title>
+<meta name="description" content="Click permissions or type 755 / rwxr-xr-x and get the octal, symbolic and chmod command. Supports setuid, setgid and sticky bit. Free, private, runs in your browser.">
+<meta property="og:title" content="Chmod Calc — free Unix permission calculator">
+<meta property="og:description" content="Octal, symbolic and chmod command from a checkbox grid. Runs 100% in your browser.">
+<meta property="og:image" content="screenshot.png">
+<link rel="icon" href="kit/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="kit/kit.css">
+<link rel="stylesheet" href="app.css">
+<script src="kit/kit.js"></script>
+</head>
+<body data-tool="chmod-calc">
+<main class="s3-main">
+  <section class="s3-hero">
+    <h1>Chmod Calc</h1>
+    <p>Tick the permissions, or type <code>755</code>, <code>rwxr-xr-x</code> or <code>u=rwx,go=rx</code>. Get the octal, symbolic and ready-to-paste <code>chmod</code> command.</p>
+  </section>
+
+  <div class="grid-2 cc-grid">
+    <section class="card">
+      <div class="row between">
+        <h2>Permissions</h2>
+        <button class="btn ghost small" id="reset"><svg class="i"><use href="#i-refresh"/></svg>Reset</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl perm-tbl" id="grid">
+          <thead><tr><th scope="col">Who</th><th scope="col">Read</th><th scope="col">Write</th><th scope="col">Execute</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <h3 class="sub">Special bits</h3>
+      <div class="specials" id="specials"></div>
+      <ul class="explain" id="explain" aria-live="polite"></ul>
+    </section>
+
+    <section class="card stack">
+      <div class="grid-2 tight">
+        <label class="field">Octal
+          <input class="input big-in mono" id="octal" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="4" aria-describedby="parse-err">
+        </label>
+        <label class="field">Symbolic
+          <input class="input big-in mono" id="symbolic" autocomplete="off" spellcheck="false" aria-describedby="parse-err">
+        </label>
+      </div>
+      <p class="faint err" id="parse-err" role="alert"></p>
+
+      <div>
+        <div class="row between">
+          <h2>Command</h2>
+          <label class="check"><input type="checkbox" id="recursive"> Recursive (-R)</label>
+        </div>
+        <label class="field mt">File or folder
+          <input class="input mono" id="file" value="file.sh" autocomplete="off" spellcheck="false" dir="auto">
+        </label>
+        <div class="cmd mt">
+          <pre class="out" id="cmd-oct"></pre>
+          <button class="btn small" id="copy-oct"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+        </div>
+        <div class="cmd mt">
+          <pre class="out" id="cmd-sym"></pre>
+          <button class="btn small" id="copy-sym"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+        </div>
+        <div class="row mt" id="flags"></div>
+      </div>
+
+      <div>
+        <h2>Common presets</h2>
+        <div class="presets" id="presets"></div>
+      </div>
+    </section>
+  </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
